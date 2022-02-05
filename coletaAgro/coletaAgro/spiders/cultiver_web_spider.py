@@ -28,7 +28,7 @@ def get_shell_base():
             }
 
 
-def get_shell_base():
+'''def get_shell_base():
     return ["cultivar", "nome_comum",
             "nome_cientifico",
             "situacao",
@@ -36,7 +36,7 @@ def get_shell_base():
             "data_registro",
             "requerente"
             ]
-
+'''
 
 class QuotesSpider(scrapy.Spider):
     name = "crawler_cultivar"
