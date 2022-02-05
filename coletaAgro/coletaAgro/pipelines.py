@@ -20,6 +20,6 @@ class CultivarPipeline:
         pass
 
     def process_item(self, item: CultivarItem, spider):
-        item.data_registro = convert_str_to_date(item.data_registro)
+        item['data_registro'] = convert_str_to_date(item['data_registro'])
 
         return item
