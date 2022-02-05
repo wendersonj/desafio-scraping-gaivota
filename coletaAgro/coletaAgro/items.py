@@ -5,6 +5,7 @@
 
 import scrapy
 
+
 class CultivarItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
@@ -15,4 +16,3 @@ class CultivarItem(scrapy.Item):
     num_registro = scrapy.Field()
     data_registro = scrapy.Field()
     requerente = scrapy.Field()
-
