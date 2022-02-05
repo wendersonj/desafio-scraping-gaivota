@@ -9,12 +9,11 @@ Nº Registro
 Data do Registro
 Mantenedor (Requerente)
 '''
-from datetime import datetime, date
-import json
+
+import re
 
 import scrapy
-import re
-import psycopg2
+
 from ..items import CultivarItem
 
 
@@ -27,16 +26,6 @@ def get_shell_base():
             "data_registro": "",
             "requerente": ""
             }
-
-
-def get_shell_base():
-    return ["cultivar", "nome_comum",
-            "nome_cientifico",
-            "situacao",
-            "num_registro",
-            "data_registro",
-            "requerente"
-            ]
 
 
 class QuotesSpider(scrapy.Spider):
@@ -55,18 +44,4 @@ class QuotesSpider(scrapy.Spider):
         result = [re.sub(pattern=r'\r*|\t*|\n*|\\*', repl='', string=re.escape(answer))
                   for answer in info_table]
 
-        '''
-        page = response.url.split("=")[-1]
-        filename = f'cultivar-page-{page}.json'
-        with open(filename, 'w', encoding='utf-8') as f:
-            json.dump({"data": result}, f, indent=4, ensure_ascii=False)
-        self.log(f'Saved file {filename}')
-        '''
-        item = dict(zip(get_shell_base(), result))
-        item['data_registro'] = convert_str_to_date(item['data_registro'])
-
-        yield CultivarItem(item)
-
-
-def convert_str_to_date(value: str) -> date:
-    return datetime.strptime(value, '%d/%m/%Y')
+        yield CultivarItem(dict(zip(get_shell_base(), result)))
