@@ -43,6 +43,16 @@ class CultivaresDB:
         else:
             print('query finalizada')
 
+    def insert_data(self, sql_data):
+        try:
+            self.query("""insert into cultivar(cultivar, nome_comum, nome_cientifico, situacao,
+    					 num_registro, data_registro, requerente) values(%s, %s, %s, %s, %s, %s, %s)""", sql_data)
+        except psycopg2.errors.NotNullViolation as e:
+            if e.pgcode == NOT_NULL_VIOLATION:
+                print('verifique os valores. há valores nulos.')
+        else:
+            print('dado inserido')
+
     def get_all(self):
         self.cursor.execute('select * from cultivar')
         return self.cursor.fetchall()
