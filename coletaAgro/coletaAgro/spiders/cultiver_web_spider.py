@@ -9,12 +9,11 @@ Nº Registro
 Data do Registro
 Mantenedor (Requerente)
 '''
-from datetime import datetime, date
-import json
+
+import re
 
 import scrapy
-import re
-import psycopg2
+
 from ..items import CultivarItem
 
 
@@ -62,11 +61,7 @@ class QuotesSpider(scrapy.Spider):
             json.dump({"data": result}, f, indent=4, ensure_ascii=False)
         self.log(f'Saved file {filename}')
         '''
-        item = dict(zip(get_shell_base(), result))
-        item['data_registro'] = convert_str_to_date(item['data_registro'])
 
-        yield CultivarItem(item)
+        yield CultivarItem(dict(zip(get_shell_base(), result)))
 
 
-def convert_str_to_date(value: str) -> date:
-    return datetime.strptime(value, '%d/%m/%Y')
