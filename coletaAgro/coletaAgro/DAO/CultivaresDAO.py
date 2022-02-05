@@ -31,7 +31,7 @@ class CultivaresDB:
 
     @property
     def cursor(self):
-        return self.connection.cursor
+        return self.connection.cursor()
 
     def query(self, query_sql, sql_data):
         try:
@@ -39,9 +39,9 @@ class CultivaresDB:
             self.connection.commit()
         except psycopg2.errors.NotNullViolation as e:
             if e.pgcode == NOT_NULL_VIOLATION:
-                print('verifique os valores. há valores nulos.')
+                print('Erro:', e)
         else:
-            print('inserido')
+            print('query finalizada')
 
     def get_all(self):
         self.cursor.execute('select * from cultivar')
@@ -67,8 +67,7 @@ if __name__ == '__main__':
 																	 '2023-01-01',
 																	'wenderson')"""
 
-    sql = """insert into cultivar(cultivar, nome_comum, nome_cientifico, situacao,
-					 num_registro, data_registro, requerente) values(%s, %s, %s, %s, %s, %s, %s)"""
+    sql = ''
     sql_data = ['Arroz', 'Arrozinho',
                 'Arroz de verdade',
                 'regular', '8002',
