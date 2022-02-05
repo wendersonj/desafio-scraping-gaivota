@@ -28,16 +28,6 @@ def get_shell_base():
             }
 
 
-'''def get_shell_base():
-    return ["cultivar", "nome_comum",
-            "nome_cientifico",
-            "situacao",
-            "num_registro",
-            "data_registro",
-            "requerente"
-            ]
-'''
-
 class QuotesSpider(scrapy.Spider):
     name = "crawler_cultivar"
 
@@ -54,14 +44,4 @@ class QuotesSpider(scrapy.Spider):
         result = [re.sub(pattern=r'\r*|\t*|\n*|\\*', repl='', string=re.escape(answer))
                   for answer in info_table]
 
-        '''
-        page = response.url.split("=")[-1]
-        filename = f'cultivar-page-{page}.json'
-        with open(filename, 'w', encoding='utf-8') as f:
-            json.dump({"data": result}, f, indent=4, ensure_ascii=False)
-        self.log(f'Saved file {filename}')
-        '''
-
         yield CultivarItem(dict(zip(get_shell_base(), result)))
-
-
