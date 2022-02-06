@@ -9,7 +9,7 @@ Nº Registro
 Data do Registro
 Mantenedor (Requerente)
 '''
-
+from itertools import zip_longest
 import re
 
 import scrapy
@@ -44,4 +44,4 @@ class QuotesSpider(scrapy.Spider):
         result = [re.sub(pattern=r'\r*|\t*|\n*|\\*', repl='', string=re.escape(answer))
                   for answer in info_table]
 
-        yield CultivarItem(dict(zip(get_shell_base(), result)))
+        yield CultivarItem(dict(zip_longest(get_shell_base(), result)))
