@@ -1,5 +1,3 @@
-import datetime
-
 import psycopg2
 from psycopg2._psycopg import OperationalError
 from psycopg2.errorcodes import NOT_NULL_VIOLATION
@@ -15,7 +13,7 @@ class CultivaresDB:
 
     @property
     def get_database_uri(self):
-        return f'postgresql://{self.username}:{self.password}@{self.hostname}:{self.database_port}/{self.database_name}?connect_timeout=10&application_name={app_name}'
+        return f'postgresql://{self.username}:{self.password}@{self.hostname}:{self.database_port}/{self.database_name}?connect_timeout=10&application_name={self.app_name}'
 
     connection = None
 
@@ -67,19 +65,3 @@ class CultivaresDB:
             self.connection.close()
         except OperationalError as e:
             print(e)
-
-
-if __name__ == '__main__':
-    sql = """insert into cultivar(cultivar, nome_comum, nome_cientifico, situacao,
-					 num_registro, data_registro, requerente) values('Arroz', 'Arrozinho',
-																	 'Arroz de verdade', 
-																	 'regular', '8002', 
-																	 '2023-01-01',
-																	'wenderson')"""
-
-    sql = ''
-    sql_data = ['Arroz', 'Arrozinho',
-                'Arroz de verdade',
-                'regular', '8002',
-                datetime.date(9999, 1, 1),
-                'wenderson']
