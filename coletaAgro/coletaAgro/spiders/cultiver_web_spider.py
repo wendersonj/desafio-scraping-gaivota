@@ -16,6 +16,7 @@ import scrapy
 
 from ..items import CultivarItem
 
+
 def get_shell_base():
     return {"cultivar": "",
             "nome_comum": "",
