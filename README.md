@@ -43,11 +43,3 @@ $ cd coletaAgro
 ```
 $ scrapy crawl crawler_cultivar
 ```
-
-# Docker
-
-. Build usando Dockerfile - usando o Powershell no Windows ou bash no Linux
-
-``` 
-docker image build -t docker-desafio-framework -f ./docker/Dockerfile .
-```
