@@ -1,5 +1,9 @@
 # Desafio Scraping - Gaivota
 
+# Configurando o banco de dados (Postgres)
+
+Execute o script de *query* localizado na pasta  `desafio-scraping-gaivota/coletaAgro/bd.sql`
+
 # Como usar - Localmente:
 
 0- Vá para a pasta do projeto e abra a pasta da aplicação
