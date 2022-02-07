@@ -23,8 +23,7 @@ class CultivarItem(scrapy.Item):
     def insert_data(db: CultivaresDB, sql_data):
         sql = ("""insert into cultivar(cultivar, nome_comum, nome_cientifico, situacao,
                 num_registro, data_registro, requerente) values(%s, %s, %s, %s, %s, %s, %s)""")
-        db.query(sql, sql_data)
-        print('dado inserido')
+        return db.query(sql, sql_data)
 
     @staticmethod
     def get_all(db):

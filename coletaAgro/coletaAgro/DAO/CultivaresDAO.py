@@ -38,11 +38,15 @@ class CultivaresDB:
         except psycopg2.errors.NotNullViolation as e:
             if e.pgcode == NOT_NULL_VIOLATION:
                 print('Erro:', e)
+                return False
         else:
             print('query finalizada')
+            return True
 
     def close_connection(self):
         try:
             self.connection.close()
+            return True
         except OperationalError as e:
             print(e)
+            return False
