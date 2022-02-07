@@ -1,6 +1,8 @@
 from datetime import date
 from itertools import zip_longest
 
+from psycopg2 import OperationalError
+
 from ..DAO.CultivaresDAO import CultivaresDB
 from ..items import CultivarItem
 from ..spiders.cultiver_web_spider import get_shell_base
@@ -8,6 +10,16 @@ from ..spiders.cultiver_web_spider import get_shell_base
 '''
 use pytest
 '''
+
+
+def test_db_connection():
+    db = CultivaresDB()
+    try:
+        cursor = db.create_connection()
+    except OperationalError:
+        assert False
+
+    assert cursor is not None
 
 
 def test_insert_item_in_db():
