@@ -47,3 +47,7 @@ $ cd coletaAgro
 ```
 $ scrapy crawl crawler_cultivar
 ```
+
+# Testes
+
+Para testes utilize a biblioteca ```pytest```.
